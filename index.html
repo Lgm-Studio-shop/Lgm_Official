@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Gentillesse Méritée | LGM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: black; color: white; scroll-behavior: smooth; }
+        .product-card img { transition: transform 0.7s ease; }
+        .product-card:hover img { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 flex justify-between items-center p-6 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="text-2xl font-bold tracking-tighter">LGM</div>
+        <div class="space-x-6 text-sm uppercase tracking-widest">
+            <a href="#shop" class="hover:text-gray-400 transition">Shop</a>
+            <a href="#contact" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+    </nav>
+
+    <section class="h-screen flex flex-col justify-center items-center text-center p-4">
+        <h1 class="text-5xl md:text-8xl font-light mb-6 uppercase tracking-tighter">la gentillesse méritée</h1>
+        <p class="text-gray-400 max-w-md mb-8 font-light italic text-sm tracking-wide">Timeless elegance. Modern sophistication. Crafted for those who deserve more.</p>
+        <a href="#shop" class="border border-white text-white px-12 py-4 text-sm font-bold uppercase hover:bg-white hover:text-black transition duration-500">Shop Now</a>
+        <div class="absolute bottom-10 animate-bounce text-[10px] uppercase tracking-[0.5em] text-gray-500">Scroll</div>
+    </section>
+
+    <section id="shop" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-8 mb-16 text-[10px] uppercase tracking-[0.3em] border-b border-white/10 pb-6">
+            <button onclick="filter('all')" class="hover:text-gray-400 transition focus:text-white focus:font-bold">All Collections</button>
+            <button onclick="filter('jeans')" class="hover:text-gray-400 transition focus:text-white focus:font-bold">Jeans</button>
+            <button onclick="filter('hoodies')" class="hover:text-gray-400 transition focus:text-white focus:font-bold">Hoodies</button>
+            <button onclick="filter('t-shirts')" class="hover:text-gray-400 transition focus:text-white focus:font-bold">T-Shirts</button>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            </div>
+    </section>
+
+    <footer id="contact" class="py-32 border-t border-white/5 text-center bg-zinc-950">
+        <div class="text-[10px] uppercase tracking-[0.5em] mb-12 text-gray-500">Official Channels</div>
+        <div class="flex justify-center space-x-16 mb-20">
+            <a href="https://www.instagram.com/la_gentillesse_me" target="_blank" class="text-sm tracking-widest hover:text-gray-400 transition border-b border-transparent hover:border-gray-400 pb-1">INSTAGRAM</a>
+            <a href="https://t.me/lgm_brand" target="_blank" class="text-sm tracking-widest hover:text-gray-400 transition border-b border-transparent hover:border-gray-400 pb-1">TELEGRAM</a>
+        </div>
+        <div class="text-[10px] text-gray-800 uppercase tracking-[0.4em]">© 2026 La Gentillesse Méritée. All rights reserved.</div>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: "STARBOY BAGGY JEANS", price: "1,900 ₴", category: "jeans", img: "https://via.placeholder.com/800x1000/0a0a0a/ffffff?text=LGM+JEANS" },
+            { id: 2, name: "DISTRESSED HOODIE V1", price: "2,400 ₴", category: "hoodies", img: "https://via.placeholder.com/800x1000/0a0a0a/ffffff?text=LGM+HOODIE" },
+            { id: 3, name: "ESSENTIAL LOGO TEE", price: "1,100 ₴", category: "t-shirts", img: "https://via.placeholder.com/800x1000/0a0a0a/ffffff?text=LGM+TEE" },
+            { id: 4, name: "VINTAGE WASH DENIM", price: "2,100 ₴", category: "jeans", img: "https://via.placeholder.com/800x1000/0a0a0a/ffffff?text=LGM+VINTAGE" }
+        ];
+
+        function renderProducts(filterTag = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filterTag === 'all' ? products : products.filter(p => p.category === filterTag);
+            
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card group cursor-pointer opacity-0 animate-[fadeIn_1s_ease_forwards]">
+                        <div class="overflow-hidden bg-zinc-900 mb-6 aspect-[3/4]">
+                            <img src="${p.img}" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-xs font-medium tracking-[0.2em] uppercase mb-2">${p.name}</h3>
+                        <p class="text-gray-500 text-[11px] tracking-widest">${p.price}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function filter(cat) { renderProducts(cat); }
+        renderProducts();
+    </script>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body>
+</html>
